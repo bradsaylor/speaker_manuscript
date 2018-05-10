@@ -1,0 +1,21 @@
+* Introduction
+** scope and assumptions
+** goals and review of devleopment
+* Physical compnents of loudspeaker 
+** parts
+** important physical parameters
+* Intuition and tools for analysis
+* The harmonic oscillator in mechanics and electronics
+** General equations
+*** Free
+*** Damped
+*** Damped and driven
+** General Solutions
+*** Free
+*** Damped
+*** Damped and driven
+** In mechanics
+** In electronics
+* Equivalent circuits
+* Analysis of the loudspeaker system
+* Derivation of TS parametes for system design

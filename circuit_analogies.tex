@@ -1,0 +1,699 @@
+\documentclass[11pt]{book}
+\usepackage{mystyle}
+
+\begin{document}
+\section*{Introduction}
+
+\section*{Transduction in the dynamic loudspeaker}
+
+The dynamic loudspeaker system is often refered to as a 'transducer,'
+and this is true as it transforms electrical power into acoustic
+power.  However, there are infact two stages of transduction that
+occur within the system.  These are electrical to mechanical power,
+and mechanical to acoustic power.
+
+Each stage is governed by physical laws that describe the key
+parameters and relationships involved.  To achieve an accurate
+equivalent circuit of the system one must have the knowledge of these
+laws and how each parameter relates to its curcuit equivaletnt.
+
+\section*{Equations of transduction}
+
+When a current is presented to the speaker voice coil the electrons in
+motion interact with the stationary field in the magnetic gap.  A
+force is produced which is perpendicular to both the current flow and
+the stationary magnetic field.  The magnetic filed is in the radial
+direction while the current is always tangent to the voice coil
+circumference.  The resulting force is always axial with
+respect to the voice coil, pushing either inward or outward.  The
+relationship is described in the following equation
+
+\begin{equation*}
+  \vec{F} = \vec{B} \ell \times \vec{i}
+\end{equation*}
+
+Where $\vec{B}$ and  $\ell$ are the magnetic gap field and length of wire
+in the magnetic gap respectively.  The multiplicaion here is a vector
+cross product, which has the magnitude
+
+\begin{equation*}
+  |\vec{F}| = |B\ell i sin(\theta)| = B\ell i
+\end{equation*}
+
+where $\theta$ is the angle between $\vec{B}$ and $\vec{i}$.  As
+stated these two vectors are perpendicular so the $|sin(\theta)|$ term
+must be unity.  The direction of $\vec{F}$ is, therefore, either
+inwards or outwards and determined by application of the right hand
+rule.
+
+Transduction between the mechanical and acoustical domains is more
+straightforward.  An acoustic pressure is generated due
+to the mechanical force derived above acting over the area of the
+speaker cone or
+
+\begin{equation*}
+  \vec{P} = \vec{F} * S_D
+\end{equation*}
+
+where $S_D$ is the effective cone surface area.  This is essentially
+the area calculated by considering the cone to be a circle with a diameter
+stretching from one surround peak across to the other.
+
+With these laws of transduction in hand we will be able to translate
+between electrical, mechanical, and acoustic domains in the eventual
+analogous circuit
+\section*{Method of construction}
+
+We now consider the method by which an analogous circuit may be
+constructed.  A logical first question would be whether or not there
+is a unique circuit representation for the mechanical analogy.  As it
+turns out there are two distinct possibilities.
+
+\subsection*{Dual circuits}
+
+Consider the development of the L-C-R cicuit response as given
+previously.  When constructed as a series circuit it was clear that
+current obeyed the same underlying differential equation as required
+by displacement in the mechanical system and a formal parallel was
+inferred.
+
+In contrast, let us consider the parallel L-C-R circuit
+
+\begin{figure}[h!]
+  \centering
+    \begin{circuitikz}[scale=1.3]
+      \draw (0,0)
+      to[R=$R$](0,2)
+      to[short] (2,2)
+      to[L=$L$] (2,0)
+      to[short] (0,0);
+      \draw (2,2)
+      to[short] (4,2)
+      to[C=$C$] (4,0)
+      to[short] (2,0);
+    \end{circuitikz}
+   \caption{Sourceless parallel L-C-R circuit}
+ \end{figure}
+
+ We determine the voltage response of this circuit by considering the
+ current through each leg.
+
+ \begin{equation*}
+   C \frac{de}{dt} + \frac{1}{R}e + \frac{1}{L} \int e \,dt = 0
+ \end{equation*}
+
+ taking the time derivative
+
+ \begin{equation*}
+   C \frac{d^2e}{dt^2} + \frac{1}{R} \frac{de}{dt} + \frac{1}{L}e = 0
+ \end{equation*}
+
+ and again we have found the equation for harmonic oscillation, albeit
+ with some swapping and inverting of constant values.  With enough
+ care in mapping mass, damping, and spring constants we may just as
+ correctly use the parallel circuit to represent mechanical
+ displacement in terms of voltage.  In general the mapping now becomes
+
+ \begin{align*}
+     \Lambda_2 &\Rightarrow \text{Mass} \Rightarrow \text{Capacitance}\\
+     \Lambda_1 &\Rightarrow \text{Damping Constant} \Rightarrow \text{1/Resistance}\\
+     \Lambda_0 &\Rightarrow \text{Spring Constant} \Rightarrow \text{1/Inductance}\\
+ \end{align*}
+
+ Circuits with this relationship are said to be duals of one another.
+ As we have seen this transformation takes the current behavior of one
+ circuit and transforms it to an identical voltage behavior in
+ another.  As a last point we also note that, should a driving voltage or
+ current source have been included, these would also swapped one for
+ the other.  A voltage source becomes a current source of the same
+ magnitude and vice versa.
+
+ Back to our analogy construction we see we have a choice to make.
+ Should the equivalent circuit be constructed as a parallel or series
+ L-C-R type?  The decision is arbitrary and often a matter of
+ convenience though care is needed to keep track of the underlying
+ parameter mappings.
+\subsection*{Choice of variables}
+
+In our analagous circuit we are most concerned with how electrical
+power at the input is translated to acoustical power at the output.
+In fact, the electrical circuit gives us power directly by considering
+the product
+
+\begin{equation*}
+  P_E = ei
+\end{equation*}
+
+Ideally our mechanical circuit should map equivalent parameters whose
+product also indicates mechanical power.  This will become important
+when the domains are linked via the equations of transduction above.
+At present we have been concerned only with mechanical displacement.
+If displacement is mapped either to current (or voltage) in an
+equivalent circuit we may ask what mechanical equivalent is
+represented by voltage (or current).  Further, would the product of
+displacement and this variable yield mechanical power?
+
+This line of reasoning suggests we try another approach.  Let us
+consider the mass-spring system equation in terms of velcity instead
+of displacement
+
+\begin{equation*}
+  m\frac{dv}{dt} + bv + k\int v \,dt = 0
+\end{equation*}
+
+Already we can see a closer similarity to the L-C-R circuit
+equivalent.  Taking the time derivative reveals the same equation of
+harmonic oscillation
+
+\begin{equation*}
+  m\frac{d^2v}{dt^2} + b\frac{dv}{dt} + kv = 0
+\end{equation*}
+
+As a result we see that mechanical velocity may be used as the analog
+to electrical current or voltage in our chosen analogy.  Taking the
+dual of this equation transforms the dependant variable into its power
+product partner
+
+\begin{equation*}
+  \frac{1}{k}\frac{d^2\Delta}{dt^2} + \frac{1}{b}\frac{d\Delta}{dt} + \frac{1}{m}\Delta = 0
+\end{equation*}
+
+For the sake of clarity we integrate both sides
+
+\begin{equation*}
+  \frac{1}{k}\frac{d\Delta}{dt} + \frac{1}{b}\Delta + \frac{1}{m}\int \Delta \,dt = 0
+\end{equation*}
+
+Now each term here must be a velocity for the dual
+relationship to hold.  Using this information we may now determine the
+variable mapped to $\Delta$.  Take, for instance, the integral term
+
+\begin{equation*}
+  \frac{1}{m}\int \Delta \,dt = v
+\end{equation*}
+
+so that $\int \Delta \,dt$ must have units of mass times velocity or
+momentum.  Straight away this imples that
+
+\begin{equation*}
+  \Delta \quad \Rightarrow \quad Force
+\end{equation*}
+
+and as required mechanical power is indeed given by
+
+\begin{equation*}
+  P_M = Fv
+\end{equation*}
+
+We will proceed in using velocity and force to represent current and
+voltage in our equivalent circuit.
+
+\subsection*{Impedance and mobility analogies}
+
+
+The two equivalent circuit analogies above have specific names.  These
+are the impedance type analogy and the mobility type analogy.  To
+distinguish between the two we look at the fundamental differential
+equation for the system.
+
+If we were to choose to map velocity to current and force to voltage
+this would correspond to the series L-C-R configuration.  This stems
+from the fact that a common velcity must be shared by both the spring
+and mass just as a common current is shared among the series cicuit
+elements.  The system equation for this scenario exhibits the damping
+term $bv$ so that $b$ is interpereted as a mechanical impedance.
+Hence this is the impedance analogy
+
+Conversely if velocity is mapped to voltage the restulting circuit is
+the parallel L-C-R configuration.  Again the velcity is common to all
+mechanical elements in the same way that the voltage is common across
+all three circuit elements.  The system equation here, as shown, has a
+damping term of $\frac{1}{b}F$ so that $b$ is interpreted as an
+inverse impedance, also called mobility.  This is the mobility analogy.
+
+
+
+
+\subsection*{Transformation between domains}
+
+The dynamic loudspeaker system contains three physical domains namely
+electrical, mechanical, and acoustical.  Transduction occurs when
+moving from one domain to another and is governed by the equations
+already given.  If each domain is to have an equivalent circuit then
+we must determine how to join these three circuits into one model.  At
+the transition point power from one domain is converted
+into an equal power in the next.  In traditional circuit theory the
+coupling of power from one circuit to another may be accomplished by
+the transformer element.
+
+\begin{center}
+\begin{circuitikz} [american]
+  \draw
+  (0,0) node[transformer core] (T) {}
+  (T.base) node{1:n}
+  (T.B2) to[short] (2, -2.1)
+  (T.B1) to[short,i_>=$i_2$] (2, 0)
+  (T.A2) to[short] (-2,-2.1)
+  (T.A1) to[short,i<=$i_1$] (-2,0)
+  ;
+
+  \draw
+  (-.5,0) to[open,v=$e_1$] (-.5,-2)
+  (1.2,0) to[open,v=$e_2$] (1.2,-2)
+  ;
+  
+\end{circuitikz}
+\end{center}
+
+For a windings ratio of $n$ the voltage and current ratios are as
+follows
+
+\begin{align*}
+  v_2 &= nv_1\\
+  i_2 &= \frac{i_1}{n}
+\end{align*}
+
+and by the electical power equation $P_E$ is conserved in the
+translation.  For our analgous circuit the windings ratio is replaced
+by the current or voltage conversion factor.  For, example mapping
+mechanical force to current and mechanical velocity to voltage and
+using the equation of transduction between electrical and mechanical
+domains gives
+
+\begin{center}
+\begin{circuitikz} [american]
+  \draw
+  (0,0) node[transformer core] (T) {}
+  (T.base) node{$B\ell$:1}
+  (T.B2) to[short] (2, -2.1)
+  (T.B1) to[short,i_>=$F$] (2, 0)
+  (T.A2) to[short] (-2,-2.1)
+  (T.A1) to[short,i<=$i$] (-2,0)
+  ;
+
+  \draw
+  (-.5,0) to[open,v=$e$] (-.5,-2)
+  (1.2,0) to[open,v=$v$] (1.2,-2)
+  ;
+  
+\end{circuitikz}
+\end{center}
+
+
+
+
+
+
+\subsection*{The driver electrical circuit}
+
+
+It is finally time to put pen to paper to form our circuit model.  We
+begin with the driver electrical domain.  Physically this consists of
+the voice coil only.  Electrically this breaks down into two
+elements.  As a length of copper wire the voice coil has resistance in
+ohms determined by its length and diameter.  This is commonly known as
+$R_e$.  Because this wire is wound in loops
+with a core of air and steel (pole piece) it also behaves as an
+inductor.  Putting these together with an input voltage source, an
+amplifier for instance, we obtain
+
+
+
+  \begin{center}
+  \begin{circuitikz}[scale=1.3, american]
+      \draw
+      (3.5,1.6) node[transformer core] (T) {}
+      ;
+      \draw (0,0)
+      to[sV, l=$e$](0, 1.6)
+      to[R=$R_e$] (1.5, 1.6)
+      to[L=$L_e$] (T.A1)
+      ;
+      \draw (0,0)
+      to[short] (T.A2)
+      ;
+ \end{circuitikz}
+\end{center}
+
+ Here the transformer has been added in anticipation of adding the
+ mechanical domain
+ 
+\subsection*{Adding the mechanical domain}
+Since our equation of transduction between electrical and mechanical
+domains relates current to mechanical force we choose the mobility
+analogy.  The quantity $B\ell$ in the electrical domain must map to unity
+in the mechancial domain giving
+
+  \begin{center}
+  \begin{circuitikz}[scale=1.3, american]
+      \draw
+      (3.5,1.6) node[transformer core] (T) {}
+      (T.base) node{1:$B\ell$}
+      ;
+      \draw (0,0)
+      to[sV, l=$e$] (0, 1.6)
+      to[R=$R_e$] (1.5, 1.6)
+      to[L=$L_e$] (T.A1)
+      ;
+      \draw (0,0)
+      to[short, i_<=$i$] (T.A2)
+      ;
+      \draw (T.B1)
+      to [short] (4.75, 1.6)
+      to [R=$\frac{1}{R_{MS}}$] (4.75, 0)
+      ;
+      \draw (4.5, 1.6)
+      to [open, v=$v$] (4.5, 0)
+      ;
+      \draw (4.75, 1.6)
+      to [short, i^>=$F$] (6, 1.6)
+      to [L=$L_C$] (6, 0)
+      ;
+      \draw (6, 1.6)
+      to [short] (7.25, 1.6)
+      to [C=$C_M$] (7.25, 0)
+      ;
+      \draw (7.25, 1.6)
+      to [short] (8, 1.6)
+      ;
+      \draw
+      (8.75, 1.6) node[transformer core] (T2) {}
+      ;
+      \draw (T2.A2)
+      to [short] (T.B2)
+      ;
+ \end{circuitikz}
+\end{center}
+
+As discussed mass corresponds to capacitance in the model and
+inductance corresponds to compliance.
+
+\subsection*{Adding the acoustic domain}
+
+In the acoustic domain we are dealing with pressure and volume
+velocity as the power product pair.  It is most intuitive to map
+pressure to voltage and volume velocity to current.  This is the
+impedance analogy and takes the form
+
+
+
+  \begin{center}
+  \begin{circuitikz}[scale=1.3, american]
+      \draw
+      (3.5,1.6) node[transformer core] (T) {}
+      (T.base) node{1:$B\ell$}
+      ;
+      \draw (0,0)
+      to[sV, l=$e$] (0, 1.6)
+      to[R=$R_e$] (1.5, 1.6)
+      to[L=$L_e$] (T.A1)
+      ;
+      \draw (0,0)
+      to[short, i_<=$i$] (T.A2)
+      ;
+      \draw (T.B1)
+      to [short] (4.75, 1.6)
+      to [R=$R_{MS}$] (4.75, 0)
+      ;
+      \draw (4.5, 1.6)
+      to [open, v=$v$] (4.5, 0)
+      ;
+      \draw (4.75, 1.6)
+      to [short, i^>=$F$] (6, 1.6)
+      to [L=$L_C$] (6, 0)
+      ;
+      \draw (6, 1.6)
+      to [short] (7.25, 1.6)
+      to [C=$C_M$] (7.25, 0)
+      ;
+      \draw (7.25, 1.6)
+      to [short] (8, 1.6)
+      ;
+      \draw
+      (8.75, 1.6) node[transformer core] (T2) {}
+      (T2.base) node{$S_D$:1}
+      ;
+      \draw (T2.A2)
+      to [short] (T.B2)
+      ;
+      \draw (T2.B1)
+      to [short] (10, 1.6)
+      to [generic=$\frac{1}{Z_f}$] (10, 0)
+      ;
+      \draw (9.7, 1.6)
+      to [open, v=$U$] (9.7, 0)
+      ;
+      \draw(10, 1.6)
+      to [short] (11, 1.6)
+      to [generic=$\frac{1}{Z_b}$] (11, 0)
+      to [short, i^>=$p$] (T2.B2)
+      ;
+ \end{circuitikz}
+\end{center}
+
+Here $Z_f$ and $Z_b$ correspond to the acoustic radiation impedances
+of the front and back of the driver respectively.  These are,
+generally, complex but will be left in these simplified terms for the
+time being.
+
+
+
+\subsection*{Completing the analogy}
+We have essentially arrived at our goal of a circuit based system
+model.  At this point  we may transform this cicuit into a form more
+suitable for analysis.  Our transformer notation shows the underlying
+relationships between domains.  For the sake
+of analysis, however, it would be better if they were not required.
+Each circuit element represents an impedance relating current to
+voltage.  The transformer equations developed above tell us how to
+transform impedances thereby obviating the use of the transformer
+element.  The impedance relationship becomes
+
+\begin{equation*}
+  Z=e/i \quad \Rightarrow \quad Z_T=(n*e)/\left(\frac{i}{n}\right) = Zn^2
+\end{equation*}
+
+
+Moving back to our circuit we wish to convert the entire model
+into the acoustic domain.  This may be accomplished in two steps.
+First we combine the mechanical and electrical domains by dividing the
+electrical domain impedances by the traformer conversion factor
+$(B\ell)^2$ giving
+
+
+  \begin{center}
+  \begin{circuitikz}[scale=1.3, american]
+      \draw (0,0)
+      to[sV, l=$\frac{e}{(B\ell)}$] (0, 1.6)
+      to[R=$\frac{R_e}{(B\ell)^2}$] (1.5, 1.6)
+      to[L=$\frac{L_e}{(B\ell)^2}$] (3, 1.6)
+      ;
+      \draw (1.5, 1.6)
+      to[open, v=$v$] (1.5, 0)
+      ;
+      \draw (3, 1.6)
+      to [R=$\frac{1}{R_{MS}}$] (3, 0)
+      ;
+      \draw (3, 1.6)
+      to [short, i^>=$F$] (4.5, 1.6)
+      to [L=$L_C$] (4.5, 0)
+      ;
+      \draw (4.5, 1.6)
+      to [short] (6, 1.6)
+      to [C=$C_M$] (6, 0)
+      ;
+      \draw (6, 1.6)
+      to [short] (7, 1.6)
+      ;
+      \draw
+      (7.75, 1.6) node[transformer core] (T2) {}
+      (T2.base) node{$S_D$:1}
+      ;
+      \draw (T2.A2)
+      to [short] (0, 0)
+      ;
+      \draw (T2.B1)
+      to [short] (9, 1.6)
+      to [generic=$\frac{1}{Z_f}$] (9, 0)
+      ;
+      \draw (8.75, 1.6)
+      to[open, v=$U$] (8.75, 0)
+      ;
+      \draw(9,1.6)
+      to [short] (10, 1.6)
+      to [generic=$\frac{1}{Z_b}$] (10, 0)
+      to [short, i^>=$p$] (T2.B2)
+      ;
+ \end{circuitikz}
+\end{center}
+
+
+The electro-mechanical domain may then be combined with the acoustical
+domain using the transformation factor $S_D{}^2$ giving
+
+  \begin{center}
+  \begin{circuitikz}[scale=1.3, american]
+      \draw (0,0)
+      to[sV, l=$\frac{eS_D}{(B\ell)}$] (0, 1.6)
+      to[R=$\frac{R_eS_D{}^2}{(B\ell)^2}$] (1.5, 1.6)
+      to[L=$\frac{L_eS_D{}^2}{(B\ell)^2}$] (3, 1.6)
+      ;
+      \draw (1.5, 1.6)
+      to[open, v=$U$] (1.5, 0)
+      ;
+      \draw (3, 1.6)
+      to [R=$\frac{S_D{}^2}{R_{MS}}$] (3, 0)
+      ;
+      \draw (3, 1.6)
+      to [short] (4.75, 1.6)
+      to [L=$L_CS_D{}^2$] (4.75, 0)
+      ;
+      \draw (4.75, 1.6)
+      to [short, i^>=$p$] (6.5, 1.6)
+      to [C=$\frac{C_M}{S_D{}^2}$] (6.5, 0)
+      ;
+      \draw (6.5, 1.6)
+      to [short] (8.5, 1.6)
+      ;
+      \draw (8.5, 1.6)
+      to [generic=$\frac{1}{Z_f}$] (8.5, 0)
+      ;
+      \draw (8.5 ,1.6)
+      to [short] (9.5, 1.6)
+      to [generic=$\frac{1}{Z_b}$] (9.5, 0)
+      to [short] (0,0)
+      ;
+            
+ \end{circuitikz}
+\end{center}
+
+Note that the mechanical mass-capacitance takes the factor
+$\frac{1}{S_D{}^2}$ because the impedance of the capacitor is
+proportional to the inverse of capacitance, namely
+$\frac{1}{j\omega C}$
+
+One more transformation is now considered.  In present form we have
+mapped volume velocity to voltage and pressure to current.  It will be
+preferrable in the analysis to come to explore the opposite mapping.
+We need to map volume velocity to current and pressure to voltage.
+This will give the more intuitive impedance analogy of the entire
+circuit.
+
+This may be accomplished in two steps.  First the driving voltage,
+voice coil resistance, and inductance are taken into the mobility
+analogy.  After this is complete the entire circuit will be of the
+mobility form.  Then we may take the dual of the entire circuit
+transforming from mobility to impedance analogies and obtaining the
+desired voltage and current mapping.
+
+By Norton's Theorm of equivalence the series voice coil resistance and
+inductance may be represented as an equivalent parallel circuit. The
+voltage source is replaced by a parallel current source whose value is
+the same as the short circuit current of the orignal series
+configuration.  Calculating the short circuit current in series gives
+
+
+
+  \begin{center}
+  \begin{circuitikz}[scale=1.3, american]
+    \draw (0, 0)
+    to[sV, l=$\frac{eS_D}{(B\ell)}$] (0, 1.6)
+    to[R=$\frac{R_eS_D{}^2}{(B\ell)^2}$] (1.5, 1.6)
+    to[L=$\frac{L_eS_D{}^2}{(B\ell)^2}$, -o] (3, 1.6)
+    ;
+    \draw [dashed] (3, 1.6)
+    to[short,i=$i_{SC}\Rightarrow\frac{(B\ell)}{S_D}\left(\frac{e}{R_e
+        + j\omega L_e}\right)$]  (3, 0)
+    ;
+    \draw (3, 0)
+    to[short, o-] (0, 0)
+    ;
+ \end{circuitikz}
+\end{center}
+
+Replacing this section with its parallel equivalent gives
+
+  \begin{center}
+  \begin{circuitikz}[scale=1.3, american]
+      \draw (0,0)
+      to[I, l=$\frac{(B\ell)}{S_D}\left(\frac{e}{R_e + j\omega
+          L_e}\right)$] (0, 3.2)
+      to[short] (3.5, 3.2)
+      ;
+      \draw (1.5, 3.2)
+      to[R=$\frac{R_eS_D{}^2}{(B\ell)^2}$] (1.5, 1.6)
+      to[L=$\frac{L_eS_D{}^2}{(B\ell)^2}$] (1.5, 0)
+      ;
+      \draw (1, 3.2)
+      to[open, v=$U$] (1, 0)
+      ;
+      \draw (3.5, 3.2)
+      to [R=$\frac{S_D{}^2}{R_{MS}}$] (3.5, 0)
+      ;ppp
+      \draw (3.5, 3.2)
+      to [short] (4.75, 3.2)
+      to [L=$L_CS_D{}^2$] (4.75, 0)
+      ;
+      \draw (4.75, 3.2)
+      to [short, i^>=$p$] (6.5, 3.2)
+      to [C=$\frac{C_M}{S_D{}^2}$] (6.5, 0)
+      ;
+      \draw (6.5, 3.2)
+      to [short] (7.75, 3.2)
+      ;
+      \draw (7.75, 3.2)
+      to [generic=$\frac{1}{Z_f}$] (7.75, 0)
+      ;
+      \draw (7.75, 3.2)
+      to [short] (8.75, 3.2)
+      to [generic=$\frac{1}{Z_b}$] (8.75, 0)
+      to [short] (0,0)
+      ;
+            
+ \end{circuitikz}
+\end{center}
+            
+We are now ready for the final step.  Taking the dual of our circuit
+gives the desired relationships, voltage to pressure and current to
+volume velocity.
+
+\begin{center}
+  \begin{circuitikz} [american, scale=1.3]
+  \draw (0, 0)
+  to[sV, l=$\frac{(B\ell)}{S_D}\left(\frac{e}{R_e
+      + j\omega L_e}\right)$] (0, 1.6)
+  to[short] (0.75, 1.6)
+  to[R, l_=$\frac{(B\ell)^2}{R_eS_D{}^2}$] (2.25, 1.6)
+  ;
+  \draw (0.75, 1.6)
+  to[short] (0.75, 2.1)
+  to[C=$\frac{L_eS_D{}^2}{(B\ell)^2}$] (2.25, 2.1)
+  to[short] (2.25, 1.6)
+  ;
+  \draw (2.25, 1.6)
+  to[R, l=$\frac{R_{MS}}{S_D{}^2}$] (3.5, 1.6)
+  to[C=$L_CS_D{}^2$] (5, 1.6)
+  to[L=$\frac{C_M}{S_D{}^2}$] (6.5, 1.6)
+  to[generic, l=$Z_f$] (8, 1.6)
+  to[generic, l=$Z_b$] (8, 0)
+  to[short, i>^=$U$] (0, 0)
+  ;
+  \draw (0.85, 1.6)
+  to[open, v=$p$] (0.85, 0)
+  ;
+  \end{circuitikz}
+\end{center}
+
+For a given front and back acoustic impedance we may now relate the
+input electrical voltage $e$ to the generated acoustic volume velocity
+and pressure.  This is the form we shall use for further analysis of
+the loudspeaker system behavior.
+
+\end {document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
