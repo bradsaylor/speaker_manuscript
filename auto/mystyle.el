@@ -9,8 +9,6 @@
     "graphicx"
     "longtable"
     "float"
-    "wrapfig"
-    "rotating"
     "amsmath"
     "textcomp"
     "amssymb"
